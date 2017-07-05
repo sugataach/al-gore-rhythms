@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 '''
-Determine if a string has all unique characters
+Determine if a string has all unique characters.
 '''
 
 def str_check(str):
