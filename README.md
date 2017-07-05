@@ -1,2 +1,2 @@
 # al-gore-rhythms
-CTCI
+![](http://i.imgur.com/xQ0iOC8.jpg)
