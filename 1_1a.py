@@ -17,6 +17,6 @@ def str_check(str):
 
 print(str_check('bb') == False)
 print(str_check('cat') == True)
-print(str_check('catc') == True)
+print(str_check('catc') == False)
 
 
