@@ -41,4 +41,24 @@ class SinglyLinkedList(object):
         is self.tail is None:
             self.tail = self.head
 
-    def 
+    def deleteElement(self, el):
+        '''
+        Retrieve and remove the given element.
+        Best = Average = Worst = O(n)
+        '''
+        if self.head.data == el:
+            self.removeHead()
+
+        if self.tail.data == el:
+            self.removeTail()
+
+        # comb through the LinkedList checking for el starting from the head
+        parent = None
+        curr = self.head
+
+        while curr.data != el:
+            parent = curr
+            curr = curr.next
+
+        if None != curr:
+            parent.next = curr.next
