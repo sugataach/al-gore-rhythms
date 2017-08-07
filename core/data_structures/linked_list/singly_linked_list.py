@@ -89,6 +89,29 @@ class SinglyLinkedList(object):
 
     def reverse(self):
         '''
-        Use 3 pointers to reverse the LinkedList in-place.
-
+        Use 3 pointers to reverse the LinkedList in-place, by walking the list
+        and reversing the link between each pair of nodes.
+        O(n)
         '''
+
+        # check for the empty case
+        if self.head is None or self.head.next is None:
+            return
+
+        a = self.head
+        b = a.next
+        c = b.next
+
+        # perform the first swap
+        a.next = None
+        b.next = a
+        a = b
+
+        # iterate through the LinkedList, swapping each time
+        while c != None:
+            b = c
+            c = c.next
+            b.next = a
+            a = b
+
+        self.head = b
