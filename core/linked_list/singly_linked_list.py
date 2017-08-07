@@ -43,8 +43,11 @@ class SinglyLinkedList(object):
 
     def deleteElement(self, el):
         '''
+        One drawback of a LinkedList is the lack of random access. So it's expensive to delete a random element, because first you have to traverse the List and find it.
+
         Retrieve and remove the given element.
-        Best = Average = Worst = O(n)
+        Best = O(1)
+        Average = Worst = O(n)
         '''
         if self.head.data == el:
             self.removeHead()
@@ -62,3 +65,21 @@ class SinglyLinkedList(object):
 
         if None != curr:
             parent.next = curr.next
+
+    def removeHead(self):
+        ''' O(1) '''
+        if self.head == self.tail:
+            self.head = self.tail = None
+        self.head = self.head.next
+
+    def removeTail(self):
+        ''' O(n) '''
+        if self.head == self.tail:
+            self.head = self.tail = None
+        else:
+            pointer = self.head
+
+            while pointer != self.tail:
+                pointer = curr.next
+            pointer.next = None
+            self.tail = pointer
