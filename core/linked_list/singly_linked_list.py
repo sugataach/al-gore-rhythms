@@ -38,7 +38,7 @@ class SinglyLinkedList(object):
         # make the Head equal to a new Node (which point to the currrent head)
         self.head = Node(data, self.head)
         # if the Tail is empty, make it equal to the Head
-        is self.tail is None:
+        if self.tail is None:
             self.tail = self.head
 
     def deleteElement(self, el):
@@ -59,17 +59,19 @@ class SinglyLinkedList(object):
         parent = None
         curr = self.head
 
-        while curr.data != el:
+        while curre != None and curr.data != el:
             parent = curr
             curr = curr.next
 
-        if None != curr:
-            parent.next = curr.next
+        if curr != None:
+            parent.next = curr.next # remove the element from the LinkedList
+
+        # you could return curr if you want (I chose not to)
 
     def removeHead(self):
         ''' O(1) '''
         if self.head == self.tail:
-            self.head = self.tail = None
+            self.head = self.tail = None # only 1 element in LL?
         self.head = self.head.next
 
     def removeTail(self):
@@ -80,6 +82,7 @@ class SinglyLinkedList(object):
             pointer = self.head
 
             while pointer != self.tail:
-                pointer = curr.next
-            pointer.next = None
+                pointer = pointer.next
+
+            pointer.next = None # remove the current tail from the LL
             self.tail = pointer
