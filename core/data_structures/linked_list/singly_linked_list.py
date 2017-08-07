@@ -59,7 +59,7 @@ class SinglyLinkedList(object):
         parent = None
         curr = self.head
 
-        while curre != None and curr.data != el:
+        while curr != None and curr.data != el:
             parent = curr
             curr = curr.next
 
