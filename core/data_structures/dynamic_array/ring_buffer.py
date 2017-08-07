@@ -14,6 +14,9 @@ class RingBuffer(object):
             self.curr = 0
             self.__class__ = RingBufferFull
 
+    def get(self):
+        return self.data
+
 class RingBufferFull(object):
     def __init__(self):
         raise 'You should use a RingBuffer'
@@ -21,3 +24,6 @@ class RingBufferFull(object):
     def append(self, el):
         self.data[curr] = el
         self.curr = (self.data + 1) % self.max_size
+
+    def get(self):
+        return self.data[self.curr:] + self.data[:self.curr] # not quite sure why we can't just return self.data?
