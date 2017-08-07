@@ -86,3 +86,9 @@ class SinglyLinkedList(object):
 
             pointer.next = None # remove the current tail from the LL
             self.tail = pointer
+
+    def reverse(self):
+        '''
+        Use 3 pointers to reverse the LinkedList in-place.
+
+        '''
