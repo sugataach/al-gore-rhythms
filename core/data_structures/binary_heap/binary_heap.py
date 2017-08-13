@@ -2,7 +2,7 @@
 Implement a (min-heap) binary heap (without decrease key)
 
 Properties:
-- is a balanced binary tree -> left & right subtrees are roughly the same size
+- is a balanced binary tree -> left & right subtrees are roughly the same size (differ at most by 1 level)
 - we keep the tree balanced by enforcing the complete tree property:
     - every level except for possibly the last has 2 children
     - all nodes are as far left as possible
