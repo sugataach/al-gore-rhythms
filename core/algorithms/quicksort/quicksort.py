@@ -17,7 +17,7 @@ def partition(arr, left, right):
     pivot = arr[left] # pivot is the left most element
     for j in range(left+1, right+1): # iterate from i to right (remember python value on right of range is non-inclusive)
         if arr[j] < pivot: # if j < i -> swap, increment i
-            arr[j], arr[i] = arr[i], arr[j]
+            arr[i], arr[j] = arr[j], arr[i]
             i += 1
     pos = i-1 # at the very end swap the value of i-1 with the pivot, so the pivot is in the middle now
     arr[left], arr[pos] = arr[pos], arr[left]
@@ -34,7 +34,7 @@ def quicksort(arr, left=0, right=None):
         _quicksort(arr, pivot+1, right)
     return _quicksort(arr, left, right)
 
-a = [1,4,4,2,5,7]
+a = [7,4,4,2,5,1]
 sorted_a = [1,2,4,4,5,7]
 quicksort(a)
 print(a == sorted_a)
