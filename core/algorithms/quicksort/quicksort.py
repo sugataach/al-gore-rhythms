@@ -7,17 +7,21 @@ Space: O(1) -> in-place
 from random import randint
 
 def partition(arr, left, right):
-    pivot = randint(left, right)
-    arr[left], arr[pivot] = arr[pivot], arr[left]
-    i = left + 1
-    pivot = arr[left]
-    for j in range(left+1, right+1):
-        if arr[j] < pivot:
+    # if you're using a random pivot, you'll need to swap the left most value and the pivot
+    # otherwise ignore the next 2 lines and just choose the pivot to be the left most value
+    # has performance implications obviously
+    pivot = randint(left, right) # choose a random pivot
+    arr[left], arr[pivot] = arr[pivot], arr[left] # swap left and pivot
+
+    i = left + 1 # i pointer is to next element from the left
+    pivot = arr[left] # pivot is the left most element
+    for j in range(left+1, right+1): # iterate from i to right (remember python value on right of range is non-inclusive)
+        if arr[j] < pivot: # if j < i -> swap, increment i
             arr[j], arr[i] = arr[i], arr[j]
             i += 1
-    pos = i-1
+    pos = i-1 # at the very end swap the value of i-1 with the pivot, so the pivot is in the middle now
     arr[left], arr[pos] = arr[pos], arr[left]
-    return pos
+    return pos # return the pivot
 
 def quicksort(arr, left=0, right=None):
     if right is None:
