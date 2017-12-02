@@ -6,22 +6,16 @@ Space: O(1) -> in-place
 """
 from random import randint
 
-def partition(arr, left, right):
-    # if you're using a random pivot, you'll need to swap the left most value and the pivot
-    # otherwise ignore the next 2 lines and just choose the pivot to be the left most value
-    # has performance implications obviously
-    pivot = randint(left, right) # choose a random pivot
-    arr[left], arr[pivot] = arr[pivot], arr[left] # swap left and pivot
-
-    i = left + 1 # i pointer is to next element from the left
-    pivot = arr[left] # pivot is the left most element
-    for j in range(left+1, right+1): # iterate from i to right (remember python value on right of range is non-inclusive)
-        if arr[j] < pivot: # if j < i -> swap, increment i
-            arr[i], arr[j] = arr[j], arr[i]
-            i += 1
-    pos = i-1 # at the very end swap the value of i-1 with the pivot, so the pivot is in the middle now
-    arr[left], arr[pos] = arr[pos], arr[left]
-    return pos # return the pivot
+def partition(arr, left, right, pivot_index):
+    arr[right], arr[pivot_index] = arr[pivot_index], arr[right]
+    pivot = arr[right]
+    swap_index = left
+    for i in range(left, right):
+        if arr[i] < pivot:
+            arr[swap_index], arr[i] = arr[i], arr[swap_index]
+            swap_index += 1
+    arr[right], arr[swap_index] = arr[swap_index], arr[right]
+    return swap_index
 
 def quicksort(arr, left=0, right=None):
     if right is None:
@@ -29,7 +23,8 @@ def quicksort(arr, left=0, right=None):
     def _quicksort(arr, left, right):
         if left >= right:
             return
-        pivot = partition(arr, left, right)
+        pivot_index = randint(left,right)
+        pivot = partition(arr, left, right, pivot_index)
         _quicksort(arr, left, pivot-1)
         _quicksort(arr, pivot+1, right)
     return _quicksort(arr, left, right)
@@ -38,3 +33,7 @@ a = [7,4,4,2,5,1]
 sorted_a = [1,2,4,4,5,7]
 quicksort(a)
 print(a == sorted_a)
+
+# a = [3, 1, 2]
+# print(quicksort(a))
+# print(a)
