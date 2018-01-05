@@ -22,9 +22,9 @@ Why?
 XOR'ing an element with itself even number of times = element
 XOR'ing an element with itself odd number of times = 0
 
-Time -> O(n)
+Time -> O(n), still need to walk through the array
 
-Space -> O(1)
+Space -> O(c), constant amount of memory to store the result as you walk through the array (ie. not proportional to the length of the array,)
 '''
 import pytest
 import functools
