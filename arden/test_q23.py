@@ -4,7 +4,7 @@ Given a text file and a word, find the positions that the word occurs in the fil
 Approach:
 
 Precomputation is a must because of the multiple lookup constraint
-Data structure must hold a mapping of "word" : {locations of word}
+Data structure must hold a mapping of "word" : locations of word
 
 Approach 1:
 
@@ -31,15 +31,55 @@ This can result in huge gains for large data sets, in terms of compression.
 
 But also, as a hash table increases in size, there can be a higher likelihood of hash collisions, which could deteriorate the lookup time to O(n), where n is the number of keys inserted -> i.e. open addressing implementation.
 
-Lookup in a balanced tree is O(m*log(n)), where m is the key length 
+Lookup in a balanced tree is O(m*log(n)), where m is the key length
 
 '''
 import pytest
+import collections
+import json
 
 def word_positions(dictionary, word):
-    pass
+    d = collections.defaultdict(list)
+    # pre-process
+    for idx,word in enumerate(dictionary):
+        d[word.lower()].append(idx)
+    return d.get(word,[])
+
+class TrieNode:
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)
+        self.is_end = False
+        self.locations = []
+
+    def insert(self, word, location):
+        node = self
+        for char in word:
+            node = node.children[char]
+        node.is_end = True
+        node.locations.append(location)
+
+    def search_locations(self, word):
+        node = self
+        for char in word:
+            if char in node.children:
+                node = node.children[char]
+            else:
+                return []
+        return node.locations
+
+    def toJSON(self):
+        return json.dumps(self.children, default=lambda o: o.children,
+sort_keys=True, indent=4)
+
+def word_positions2(dictionary, word):
+    t = TrieNode()
+    for idx,dict_word in enumerate(dictionary):
+        t.insert(dict_word, idx)
+    print(t.toJSON())
+    return t.search_locations(word)
 
 def test_word_positions():
-    dictionary = []
-    word =
-    assert(odd_elem(arr)) == 1
+    dictionary = ['set','sun','submarine','submit','set']
+    word = 'set'
+    assert(word_positions(dictionary, word)) == [0, 4]
+    assert(word_positions2(dictionary, word)) == [0, 4]
